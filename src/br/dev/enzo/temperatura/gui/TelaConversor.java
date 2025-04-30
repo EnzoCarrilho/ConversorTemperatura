@@ -10,6 +10,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 
 import br.dev.enzo.temperatura.model.Temperatura;
 
@@ -21,6 +22,7 @@ public class TelaConversor {
 	private JButton buttonFahreinheit;
 	private JLabel labelResultado;
 	private JLabel labelMensagemErro;
+	
 	
 	public void criarTelaConversor() {
 		
@@ -50,17 +52,18 @@ public class TelaConversor {
 		
 		labelResultado = new JLabel();
 		labelResultado.setBounds(150, 130, 230, 40);
+		//criando a fonte
 		Font fonteResultado = labelResultado.getFont();
+		//definindo a estilização e tamanho da fonte
 		Font fonteNegrito = new Font(fonteResultado.getFontName(), Font.BOLD, 25);
+		//atribuindo a fonte ao label resultado
 		labelResultado.setFont(fonteNegrito);
 		
-		
 		labelMensagemErro = new JLabel();
-		labelMensagemErro.setBounds(180, 130, 200, 40);
-		labelMensagemErro.setText("Tipo de entrada inválida.");
+		labelMensagemErro.setBounds(170, 190, 200, 40);
+		labelMensagemErro.setText("Tipo de entrada inválida");
 		labelMensagemErro.setVisible(false);
 		labelMensagemErro.setForeground(Color.red);
-		
 		
 
 		container.add(textCelsius);
@@ -77,8 +80,6 @@ public class TelaConversor {
 				
 				try {
 					
-					labelMensagemErro.setVisible(false);
-					
 					//caso a casa decimal seja separada por "," será substituido por "."
 					String grausCelsius = textCelsius.getText().replace("," , ".");
 					
@@ -91,10 +92,11 @@ public class TelaConversor {
 					
 					labelResultado.setText(resultado + "Fahreinheit");
 					
-					// pegando a exeção de formato de número e exibindo o labelResultado
+					labelMensagemErro.setVisible(false);
+					
+					//pegando a exceção que será mandada quando não for possível converter o valor da String grausCelsius para um valor numérico - CelsiusDouble.
 				}catch(NumberFormatException exceção){
 					
-					labelResultado.setVisible(false);
 					labelMensagemErro.setVisible(true);
 				}
 				
@@ -107,8 +109,6 @@ public class TelaConversor {
 						
 						try {
 							
-							labelMensagemErro.setVisible(false);
-							
 							String grausCelsius = textCelsius.getText().replace("," , ".");
 							
 							Double CelsiusDouble = Double.parseDouble(grausCelsius);
@@ -120,10 +120,11 @@ public class TelaConversor {
 							
 							labelResultado.setText(resultado + "Kelvin");
 							
+							labelMensagemErro.setVisible(false);
+							
 							
 						}catch(NumberFormatException exceção){
 							
-							labelResultado.setVisible(false);
 							labelMensagemErro.setVisible(true);
 						}
 						
